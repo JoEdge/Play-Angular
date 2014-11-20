@@ -3,9 +3,9 @@
   angular.module('GiftList')
 
   .controller('ListController',
-    ['$scope', '$http', '$location', 'appUrl', function ($scope, $http, $location, appUrl) {
+    ['factory', '$scope', function ($scope) {
 
-    $http.get(appUrl).success( function (results){
+    factory.getGiftee().success( function (results){
       $scope.giftee = results;
     });
 
