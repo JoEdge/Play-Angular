@@ -11,7 +11,7 @@
 
     $routeProvider.when('/add', {
       templateUrl: 'templates/add-template.html',
-      controller: 'AddController'
+      controller: 'ListedController'
     });
 
     $routeProvider.when('/single/:gifteeid', {

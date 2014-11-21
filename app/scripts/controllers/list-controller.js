@@ -3,15 +3,20 @@
   angular.module('GiftList')
 
   .controller('ListController',
-    ['factory', '$scope', function ($scope) {
+    ['factory', '$scope', '$rootScope', function (factory, $scope, $rootScope) {
 
     factory.getGiftee().success( function (results){
       $scope.giftee = results;
     });
 
-    $scope.viewMore = function (gifted) {
-      $location.path('/single/' + gifted._id);
-    };
+    $scope.addGift = function (gifted) {
+      giftsFactory.addGift(gifted);
+
+      $rootScope.$on('gifted:add', function () {
+        $location.path('/');
+      });
+
+    }
 
 
   }]);
