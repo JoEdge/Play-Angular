@@ -1,29 +1,57 @@
 (function (){
 
-  angular.module('GiftList', ['ngRoute'])
+  var app = angular.module('GiftList', []);
 
-  .config( function ($routeProvider) {
+  app.controller ('ListController', function(){
+    //persons is a property of the controller
+    this.persons = giftees;
+  });
 
-    $routeProvider.when('/', {
-      templateUrl: 'templates/list-template.html',
-      controller: 'ListController'
-    });
+  app.controller('TabController', function() {
+    this.tab = 1;
 
-    $routeProvider.when('/add', {
-      templateUrl: 'templates/add-template.html',
-      controller: 'ListedController'
-    });
+    this.setTab = function(set) {
+      this.tab = set;
+    };
 
-    $routeProvider.when('/single/:gifteeid', {
-      templateUrl: 'templates/single-template.html',
-      controller: 'ListedController'
-    });
-
-    $routeProvider.otherwise({
-      templateUrl: 'templates/other-template.html',
-      controller: 'OtherController'
-    });
+    this.isSet = function(setValue) {
+      return this.tab === setValue;
+    };
 
   });
+
+  app.controller('AddController', function(){
+
+  });
+
+    var giftees = [
+    {
+      name: 'Jonas',
+      age: 13,
+      address: '123 Main St.',
+      likes: 'Cardistry',
+      gift: '...',
+      sendGift: true,
+      giftsent: false
+    },
+    {
+      name: 'Will',
+      age: 11,
+      address: '123 Main St.',
+      likes: 'Soccer',
+      gift: '...',
+      sendGift: true,
+      giftsent: false
+    },
+    {
+      name: 'Catherine',
+      age: 1,
+      address: '123 Main St.',
+      likes: 'Doll',
+      gift: '...',
+      sendGift: false,
+      giftsent: true
+    }
+  ];
 
 }());

@@ -1,5 +1,5 @@
 (function (){
-
+/*
   angular.module('GiftList')
 
   .controller('ListController',
@@ -20,5 +20,5 @@
 
 
   }]);
-
+*/
 }());
