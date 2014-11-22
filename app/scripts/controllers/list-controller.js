@@ -1,24 +1,19 @@
 (function (){
-/*
+
   angular.module('GiftList')
 
   .controller('ListController',
-    ['factory', '$scope', '$rootScope', function (factory, $scope, $rootScope) {
+    ['$scope', '$http', '$location', 'appUrl', function ($scope, $http, $location, appUrl) {
 
-    factory.getGiftee().success( function (results){
-      $scope.giftee = results;
-    });
+  $http.get(appUrl).success( function (results){
+    $scope.persons = results;
+  });
 
-    $scope.addGift = function (gifted) {
-      giftsFactory.addGift(gifted);
-
-      $rootScope.$on('gifted:add', function () {
-        $location.path('/');
-      });
-
-    }
+  $scope.viewMore = function (person) {
+    $location.path('/single/' + person._id);
+  };
 
 
   }]);
-*/
+
 }());

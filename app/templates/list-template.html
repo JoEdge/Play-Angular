@@ -1,1 +1,5 @@
-
+<div class="listed">
+  <p ng-repeat="person in persons" ng-click="viewMore(person)">
+    {{person.name}} is {{person.age}}, likes {{person.likes}} and wants {{person.gift}}.
+  </p>
+</div>

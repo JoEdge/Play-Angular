@@ -23,20 +23,11 @@
   </head>
   <body ng-app="GiftList">
 
-    <div class="main" ng-controller="ListController as list">
+    <div class="main">
+      <a href="#/">Home</a> | <a href="#/add">Add</a>
       <h1>Playing with Angular</h1>
         <!-- "as list" specifies an alias for the controller-->
-    <section class="tab" ng-controller="TabController as tab">
-      <ul>
-        <li ng-class="{active: tab.isSet(1)}"><a href ng-click="tab.setTab(1)">Gift List</a></li>
-        <li ng-class="{active: tab.isSet(2)}"><a href ng-click="tab.setTab(2)">Add</a></li>
-      </ul>
-      <div ng-show="tab.isSet(1)">
-        <p ng-repeat="person in list.persons">{{person.name}} is {{person.age}}. They like {{person.likes}} and want {{person.gift}}.
-      </div>
-      <div ng-controller="AddController as add" ng-show="tab.isSet(2)">
-        <p>Add here</p>
-      </div>
+    <section class="tab" ng-view>
     </section>
   </div>
     <!-- build:js scripts/vendor.js -->
@@ -50,8 +41,11 @@
 
         <!-- build:js scripts/main.js -->
         <script src="scripts/main.js"></script>
+        <script src="scripts/controllers/tab-controller.js"></script>
         <script src="scripts/controllers/other-controller.js"></script>
         <script src="scripts/controllers/list-controller.js"></script>
+        <script src="scripts/controllers/add-controller.js"></script>
+        <script src="scripts/controllers/single-controller.js"></script>
 
         <!-- endbuild -->
 </body>

@@ -1,9 +1,9 @@
 (function (){
 
-  angular.module('GiftList', ['ngRoute'])
+  var app = angular.module('GiftList', ['ngRoute']);
 
-  .constant ({
-    'appUrl': 'http://tiy-atl-fe-server.herokuapp.com/collections/angJoanna1'
+  app.constant ({
+    'appUrl': 'http://tiy-atl-fe-server.herokuapp.com/collections/JoannaAngular4/'
   })
 
   .config( function ($routeProvider) {
@@ -18,15 +18,30 @@
       controller: 'AddController'
     });
 
-    $routeProvider.when('/single/:gifteeid', {
-      templateUrl: 'templates/single-template.html',
-      controller: 'SingleController'
-    });
-
     $routeProvider.otherwise({
       templateUrl: 'templates/other-template.html',
       controller: 'OtherController'
     });
+
+  });
+
+
+}());
+
+(function () {
+
+  angular.module('GiftList')
+
+  .controller('TabController', function() {
+    this.tab = 1;
+
+    this.setTab = function(set) {
+      this.tab = set;
+    };
+
+    this.isSet = function(setValue) {
+      return this.tab === setValue;
+    };
 
   });
 
@@ -49,13 +64,13 @@
   .controller('ListController',
     ['$scope', '$http', '$location', 'appUrl', function ($scope, $http, $location, appUrl) {
 
-    $http.get(appUrl).success( function (results){
-      $scope.giftee = results;
-    });
+  $http.get(appUrl).success( function (results){
+    $scope.persons = results;
+  });
 
-    $scope.viewMore = function (gifted) {
-      $location.path('/single/' + gifted._id);
-    };
+  $scope.viewMore = function (person) {
+    $location.path('/single/' + person._id);
+  };
 
 
   }]);
@@ -65,14 +80,16 @@
 (function () {
 
   angular.module('GiftList')
-  .controller('AddController',
-    ['$scope', '$http', '$location', 'appUrl', function ($scope, $http, $location, appUrl) {
 
-    $scope.gifted = {};
+  .controller('AddController',
+  
+  ['$scope', '$http', '$location', 'appUrl', function ($scope, $http, $location, appUrl) {
+
+    $scope.person = {};
 
     $scope.addPerson = function () {
 
-      $http.post(appUrl, $scope.gifted).success( function (data) {
+      $http.post(appUrl, $scope.person).success( function (data) {
         $location.path('/');
       });
 
@@ -80,31 +97,6 @@
 
   }]);
 
-
 }());
 
-(function () {
 
-  angular.module('GiftList')
-  .controller('SingleController',
-    ['$scope', '$http', '$routeParams', '$location', 'appUrl', function ($scope, $http, $routeParams,$location, appUrl) {
-
-    $scope.gifted = {
-
-      $http.get(appUrl + $routeParams).success( function (results){
-        $scope.giftee = results;
-      });
-
-    };
-
-    $scope.updatePerson = function () {
-
-      $http.post(appUrl, $scope.gifted).success( function (data) {
-        $location.path('/single/:gifteeid');
-      });
-
-    };
-
-  }]);
-
-}());

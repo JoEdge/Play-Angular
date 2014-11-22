@@ -1,57 +1,29 @@
 (function (){
 
-  var app = angular.module('GiftList', []);
+  var app = angular.module('GiftList', ['ngRoute']);
 
-  app.controller ('ListController', function(){
-    //persons is a property of the controller
-    this.persons = giftees;
+  app.constant ({
+    'appUrl': 'http://tiy-atl-fe-server.herokuapp.com/collections/JoannaAngular4/'
+  })
+
+  .config( function ($routeProvider) {
+
+    $routeProvider.when('/', {
+      templateUrl: 'templates/list-template.html',
+      controller: 'ListController'
+    });
+
+    $routeProvider.when('/add', {
+      templateUrl: 'templates/add-template.html',
+      controller: 'AddController'
+    });
+
+    $routeProvider.otherwise({
+      templateUrl: 'templates/other-template.html',
+      controller: 'OtherController'
+    });
+
   });
 
-  app.controller('TabController', function() {
-    this.tab = 1;
-
-    this.setTab = function(set) {
-      this.tab = set;
-    };
-
-    this.isSet = function(setValue) {
-      return this.tab === setValue;
-    };
-
-  });
-
-  app.controller('AddController', function(){
-
-  });
-
-    var giftees = [
-    {
-      name: 'Jonas',
-      age: 13,
-      address: '123 Main St.',
-      likes: 'Cardistry',
-      gift: '...',
-      sendGift: true,
-      giftsent: false
-    },
-    {
-      name: 'Will',
-      age: 11,
-      address: '123 Main St.',
-      likes: 'Soccer',
-      gift: '...',
-      sendGift: true,
-      giftsent: false
-    },
-    {
-      name: 'Catherine',
-      age: 1,
-      address: '123 Main St.',
-      likes: 'Doll',
-      gift: '...',
-      sendGift: false,
-      giftsent: true
-    }
-  ];
 
 }());
